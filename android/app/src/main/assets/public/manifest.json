@@ -1,0 +1,71 @@
+{
+  "id": "/",
+  "short_name": "Su-Qur POS",
+  "name": "Su-Qur Coffee & Kitchen - POS",
+  "description": "Aplikasi Kasir Point of Sale (POS) Su-Qur Coffee & Kitchen untuk kelola pesanan, inventaris, laporan keuangan, dan menu.",
+  "categories": ["business", "food", "finance"],
+  "lang": "id",
+  "dir": "ltr",
+  "scope": "/",
+  "start_url": "/",
+  "background_color": "#ffffff",
+  "theme_color": "#111827",
+  "display": "standalone",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Quick Order Kasir",
+      "short_name": "Kasir",
+      "description": "Buka layar kasir transaksi Su-Qur POS",
+      "url": "/",
+      "icons": [
+        {
+          "src": "/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/screenshots/desktop-home.webp",
+      "sizes": "1920x1080",
+      "type": "image/webp",
+      "form_factor": "wide",
+      "label": "Desktop view showing Su-Qur POS cashier register interface"
+    },
+    {
+      "src": "/screenshots/mobile-home.webp",
+      "sizes": "750x1334",
+      "type": "image/webp",
+      "form_factor": "narrow",
+      "label": "Mobile view showing quick order cashier menu"
+    }
+  ],
+  "related_applications": [
+    {
+      "platform": "windows",
+      "url": "https://www.example-app.com",
+      "id": "example.ExampleApp"
+    },
+    {
+      "platform": "play",
+      "url": "https://www.example-app-2.com"
+    }
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json.schemastore.org/web-manifest-combined.json",
+  "id": "/?source=pwa",
+  "name": "Kedai Kopi Wahid Su-Qur - POS",
+  "short_name": "Su-Qur POS",
+  "description": "Aplikasi Kasir POS & Manajemen Outlet Kedai Kopi Wahid Su-Qur - Dukungan Mode Offline, Cetak Struk Thermal Bluetooth, & Sinkronisasi Cloud.",
+  "categories": ["business", "food", "productivity", "finance"],
+  "lang": "id",
+  "dir": "ltr",
+  "scope": "/",
+  "start_url": "/?source=pwa",
+  "background_color": "#F9F6F2",
+  "theme_color": "#2B1713",
+  "display": "standalone",
+  "display_override": ["fullscreen", "standalone", "minimal-ui", "browser"],
+  "orientation": "any",
+  "prefer_related_applications": false,
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Kasir & Transaksi POS",
+      "short_name": "Kasir",
+      "description": "Buka layar kasir transaksi Su-Qur POS",
+      "url": "/?source=shortcut-pos",
+      "icons": [
+        {
+          "src": "/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Laporan & Rekap Shift",
+      "short_name": "Laporan",
+      "description": "Buka laporan penjualan dan omset harian",
+      "url": "/?source=shortcut-reports",
+      "icons": [
+        {
+          "src": "/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/screenshots/desktop-home.webp",
+      "sizes": "1920x1080",
+      "type": "image/webp",
+      "form_factor": "wide",
+      "label": "Tampilan kasir POS register layar desktop Kedai Kopi Wahid Su-Qur"
+    },
+    {
+      "src": "/screenshots/mobile-home.webp",
+      "sizes": "750x1334",
+      "type": "image/webp",
+      "form_factor": "narrow",
+      "label": "Tampilan kasir POS register layar smartphone Kedai Kopi Wahid Su-Qur"
+    }
+  ]
+}

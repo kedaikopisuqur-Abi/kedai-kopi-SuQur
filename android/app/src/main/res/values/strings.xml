@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Kedai Su-Qur POS</string>
+    <string name="title_activity_main">Kedai Su-Qur POS</string>
+    <string name="package_name">com.suqur.pos</string>
+    <string name="custom_url_scheme">com.suqur.pos</string>
+</resources>

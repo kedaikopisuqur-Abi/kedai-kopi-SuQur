@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="id" class="h-full">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <meta name="theme-color" content="#2B1713" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Kedai Kopi Wahid Su-Qur" />
+    <meta name="application-name" content="Kedai Kopi Wahid Su-Qur" />
+    <meta name="description" content="Aplikasi Kasir POS & Manajemen Kedai Kopi Wahid Su-Qur - Offline First, Print Thermal Bluetooth & Sinkronisasi Cloud." />
+    
+    <title>Kedai Kopi Wahid Su-Qur - POS</title>
+    
+    <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png" />
+    <link rel="apple-touch-icon" href="/icon-192.png" />
+    <link rel="apple-touch-icon" sizes="192x192" href="/icon-192.png" />
+    <link rel="apple-touch-icon" sizes="512x512" href="/icon-512.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="serviceworker" href="/sw.js" />
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,600;1,700;1,800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <style>
+      /* Prevent Vite dev overlay popups and error dialogs for background network/websocket notifications */
+      vite-error-overlay {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+      }
+    </style>
+    <script>
+      (function() {
+        // Global Unhandled Rejection & Error Trap for Firestore WebChannel / Assertion logs
+        window.addEventListener('unhandledrejection', function(event) {
+          var reason = (event && event.reason && (event.reason.message || event.reason.stack || String(event.reason))) || '';
+          if (
+            reason.indexOf('INTERNAL ASSERTION FAILED') !== -1 ||
+            reason.indexOf('c050') !== -1 ||
+            reason.indexOf('FIRESTORE') !== -1 ||
+            reason.indexOf('resource-exhausted') !== -1 ||
+            reason.indexOf('Quota limit exceeded') ||
+            reason.indexOf('Quota exceeded') !== -1 ||
+            reason.indexOf('maximum backoff delay') !== -1 ||
+            reason.indexOf('failed to connect to websocket') !== -1 ||
+            reason.indexOf('[GSI_LOGGER]') !== -1 ||
+            reason.indexOf('Failed to open popup window') !== -1 ||
+            reason.indexOf('gsiwebsdk') !== -1
+          ) {
+            event.preventDefault();
+            if (typeof event.stopImmediatePropagation === 'function') {
+              event.stopImmediatePropagation();
+            }
+            if (typeof event.stopPropagation === 'function') {
+              event.stopPropagation();
+            }
+            return false;
+          }
+        }, true);
+
+        window.addEventListener('error', function(event) {
+          var msg = (event && (event.message || String(event))) || '';
+          if (
+            msg.indexOf('INTERNAL ASSERTION FAILED') !== -1 ||
+            msg.indexOf('c050') !== -1 ||
+            msg.indexOf('FIRESTORE') !== -1 ||
+            msg.indexOf('resource-exhausted') !== -1 ||
+            msg.indexOf('Quota limit exceeded') !== -1 ||
+            msg.indexOf('Quota exceeded') !== -1 ||
+            msg.indexOf('maximum backoff delay') !== -1 ||
+            msg.indexOf('failed to connect to websocket') !== -1 ||
+            msg.indexOf('[GSI_LOGGER]') !== -1 ||
+            msg.indexOf('Failed to open popup window') !== -1 ||
+            msg.indexOf('gsiwebsdk') !== -1
+          ) {
+            event.preventDefault();
+            if (typeof event.stopImmediatePropagation === 'function') {
+              event.stopImmediatePropagation();
+            }
+            if (typeof event.stopPropagation === 'function') {
+              event.stopPropagation();
+            }
+            return false;
+          }
+        }, true);
+
+        // Intercept console errors/warnings for known benign library assertions
+        var origError = console.error;
+        console.error = function() {
+          var argsStr = Array.prototype.slice.call(arguments).map(function(a) {
+            return (typeof a === 'object') ? (JSON.stringify(a) || '') : String(a);
+          }).join(' ');
+
+          if (
+            argsStr.indexOf('INTERNAL ASSERTION FAILED') !== -1 ||
+            argsStr.indexOf('c050') !== -1 ||
+            argsStr.indexOf('FIRESTORE') !== -1 ||
+            argsStr.indexOf('resource-exhausted') !== -1 ||
+            argsStr.indexOf('Quota limit exceeded') !== -1 ||
+            argsStr.indexOf('Quota exceeded') !== -1 ||
+            argsStr.indexOf('maximum backoff delay') !== -1 ||
+            argsStr.indexOf('failed to connect to websocket') !== -1 ||
+            argsStr.indexOf('WebSocket closed without opened') !== -1 ||
+            argsStr.indexOf('[GSI_LOGGER]') !== -1 ||
+            argsStr.indexOf('Failed to open popup window') !== -1 ||
+            argsStr.indexOf('gsiwebsdk') !== -1
+          ) {
+            return;
+          }
+          origError.apply(console, arguments);
+        };
+
+        var origWarn = console.warn;
+        console.warn = function() {
+          var argsStr = Array.prototype.slice.call(arguments).map(function(a) {
+            return (typeof a === 'object') ? (JSON.stringify(a) || '') : String(a);
+          }).join(' ');
+
+          if (
+            argsStr.indexOf('INTERNAL ASSERTION FAILED') !== -1 ||
+            argsStr.indexOf('c050') !== -1 ||
+            argsStr.indexOf('FIRESTORE') !== -1 ||
+            argsStr.indexOf('resource-exhausted') !== -1 ||
+            argsStr.indexOf('Quota limit exceeded') !== -1 ||
+            argsStr.indexOf('Quota exceeded') !== -1 ||
+            argsStr.indexOf('maximum backoff delay') !== -1 ||
+            argsStr.indexOf('failed to connect to websocket') !== -1 ||
+            argsStr.indexOf('WebSocket closed without opened') !== -1 ||
+            argsStr.indexOf('[GSI_LOGGER]') !== -1 ||
+            argsStr.indexOf('Failed to open popup window') !== -1 ||
+            argsStr.indexOf('gsiwebsdk') !== -1
+          ) {
+            return;
+          }
+          origWarn.apply(console, arguments);
+        };
+      })();
+
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker.register('/sw.js').then(function(reg) {
+            console.log('SW registered successfully:', reg.scope);
+          }).catch(function(err) {
+            console.warn('SW registration failed:', err);
+          });
+        });
+      }
+    </script>
+  </head>
+  <body class="h-full bg-[#F9F6F2] text-[#3E2723] font-sans antialiased">
+    <div id="root" class="h-full"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+

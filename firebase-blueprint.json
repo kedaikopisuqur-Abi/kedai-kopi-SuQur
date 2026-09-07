@@ -1,0 +1,93 @@
+{
+  "schemaVersion": "1.0.0",
+  "entities": {
+    "settings": {
+      "description": "Store profile and configuration settings",
+      "fields": {
+        "storeName": { "type": "string", "required": true },
+        "tagline": { "type": "string", "required": false },
+        "address": { "type": "string", "required": false },
+        "phone": { "type": "string", "required": false },
+        "logoUrl": { "type": "string", "required": false },
+        "receiptHeader": { "type": "string", "required": false },
+        "receiptFooter": { "type": "string", "required": false },
+        "printerPaperSize": { "type": "string", "required": true }
+      }
+    },
+    "users": {
+      "description": "Cashier and admin staff accounts with PIN login",
+      "fields": {
+        "id": { "type": "string", "required": true },
+        "name": { "type": "string", "required": true },
+        "role": { "type": "string", "required": true },
+        "pin": { "type": "string", "required": true }
+      }
+    },
+    "products": {
+      "description": "Menu products and stock items",
+      "fields": {
+        "id": { "type": "string", "required": true },
+        "name": { "type": "string", "required": true },
+        "categoryId": { "type": "string", "required": true },
+        "price": { "type": "number", "required": true },
+        "costPrice": { "type": "number", "required": true },
+        "stock": { "type": "number", "required": true },
+        "minStock": { "type": "number", "required": true }
+      }
+    },
+    "produk": {
+      "description": "Katalog produk dan resep menu (Versi Bahasa Indonesia)",
+      "fields": {
+        "id": { "type": "string", "required": true },
+        "nama": { "type": "string", "required": true },
+        "harga": { "type": "number", "required": true },
+        "hpp": { "type": "number", "required": true },
+        "kategori": { "type": "string", "required": true }
+      }
+    },
+    "ingredients": {
+      "description": "Raw material inventory for recipes",
+      "fields": {
+        "id": { "type": "string", "required": true },
+        "name": { "type": "string", "required": true },
+        "unit": { "type": "string", "required": true },
+        "currentStock": { "type": "number", "required": true },
+        "minStock": { "type": "number", "required": true },
+        "costPerUnit": { "type": "number", "required": true }
+      }
+    },
+    "transactions": {
+      "description": "Sales transactions and receipt records",
+      "fields": {
+        "id": { "type": "string", "required": true },
+        "invoiceNumber": { "type": "string", "required": true },
+        "items": { "type": "array", "required": true },
+        "total": { "type": "number", "required": true },
+        "paymentMethod": { "type": "string", "required": true },
+        "cashierName": { "type": "string", "required": true },
+        "timestamp": { "type": "string", "required": true }
+      }
+    },
+    "shifts": {
+      "description": "Cashier work shifts and cash drawer logs",
+      "fields": {
+        "id": { "type": "string", "required": true },
+        "cashierId": { "type": "string", "required": true },
+        "cashierName": { "type": "string", "required": true },
+        "startTime": { "type": "string", "required": true },
+        "startCash": { "type": "number", "required": true },
+        "status": { "type": "string", "required": true }
+      }
+    },
+    "expenses": {
+      "description": "Operational expense records",
+      "fields": {
+        "id": { "type": "string", "required": true },
+        "date": { "type": "string", "required": true },
+        "amount": { "type": "number", "required": true },
+        "category": { "type": "string", "required": true }
+      }
+    }
+  },
+  "securityRules": "rules_version = '2';\nservice cloud.firestore {\n  match /databases/{database}/documents {\n    match /{document=**} {\n      allow read, write: if true;\n    }\n  }\n}"
+}

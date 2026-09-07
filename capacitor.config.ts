@@ -1,0 +1,22 @@
+import type { CapacitorConfig } from '@capacitor/cli';
+
+const config: CapacitorConfig = {
+  appId: 'com.suqur.pos',
+  appName: 'Kedai Su-Qur POS',
+  webDir: 'dist',
+  server: {
+    androidScheme: 'https',
+    cleartext: true,
+  },
+  plugins: {
+    ActionSheet: {
+      style: 'DEFAULT',
+    },
+  },
+  android: {
+    allowMixedContent: true,
+    backgroundColor: '#2B1713',
+  },
+};
+
+export default config;

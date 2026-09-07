@@ -1,0 +1,8 @@
+{
+  "name": "final Su-Qur POS build",
+  "description": "backup Aplikasi Kasir (POS) Point of Sale Profesional untuk Kedai Kopi \u0026 Cafe dengan Manajemen HPP, Stok Bahan Baku, Resep, Laporan \u0026 Cetak Thermal",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

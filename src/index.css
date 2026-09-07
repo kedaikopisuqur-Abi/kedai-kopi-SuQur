@@ -1,0 +1,401 @@
+@import "tailwindcss";
+
+@layer base {
+  html,
+  body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    background-color: #F9F6F2;
+    color: #3E2723;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  /* ==========================================================================
+     PILAR 3: FLEXIBLE IMAGES (GAMBAR RESPONSIF)
+     max-width: 100% dan height: auto pada semua gambar & elemen media
+     ========================================================================== */
+  img,
+  picture,
+  video,
+  canvas,
+  svg {
+    max-width: 100%;
+    height: auto;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    vertical-align: middle;
+    object-fit: cover;
+  }
+
+  html.dark,
+  html.dark body {
+    background-color: #140C0A;
+    color: #FAF3DD;
+  }
+
+  #root {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+
+  h1, h2, h3, .font-serif {
+    font-family: 'Playfair Display', Georgia, serif;
+  }
+}
+
+/* ==========================================================================
+   PILAR 2: FLEXIBLE GRIDS & RELATIVE UNITS (TATA LETAK FLEKSIBEL / RELATIF)
+   Menggunakan satuan relatif: %, rem, em, clamp(), fr menggantikan satuan px kaku
+   ========================================================================== */
+:root {
+  --app-max-width: 90rem;
+  --app-fluid-padding: clamp(0.75rem, 2.5vw, 2rem);
+  --fluid-gap: clamp(0.5rem, 1.5vw, 1.25rem);
+  --fluid-radius: clamp(0.75rem, 1.2vw, 1rem);
+  --min-touch-target: 2.75rem; /* 44px standar aksesibilitas sentuh */
+}
+
+/* Kontainer utama fleksibel dengan padding dan batas maksimum relatif */
+.container-fluid-responsive {
+  width: 100%;
+  max-width: var(--app-max-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--app-fluid-padding);
+  padding-right: var(--app-fluid-padding);
+}
+
+/* Grid fleksibel otomatis menyesuaikan kolom berdasarkan ruang kontainer */
+.grid-fluid-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15.5rem), 1fr));
+  gap: var(--fluid-gap);
+  width: 100%;
+}
+
+.grid-fluid-products {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 11rem), 1fr));
+  gap: var(--fluid-gap);
+  width: 100%;
+}
+
+.grid-fluid-split {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+  gap: var(--fluid-gap);
+  width: 100%;
+}
+
+/* ==========================================================================
+   PILAR 1: MEDIA QUERIES (KUERI MEDIA RESPONSIF SEMUA PERANGKAT)
+   1. Layar Ponsel: di bawah 768px (< 768px)
+   2. Layar Tablet: 768px - 1024px
+   3. Layar Desktop: di atas 1024px (> 1024px)
+   4. Layar Lebar: di atas 1440px (> 1440px)
+   ========================================================================== */
+
+/* 1. MEDIA QUERY: LAYAR PONSEL / SMARTPHONE (< 768px) */
+@media screen and (max-width: 767.98px) {
+  :root {
+    --app-fluid-padding: 0.75rem;
+  }
+
+  html {
+    font-size: 15px; /* Skala tipografi lebih proporsional untuk layar genggam */
+  }
+
+  body {
+    line-height: 1.45;
+  }
+
+  /* Standar target sentuh mobile (min-height 44px) */
+  .mobile-touch-target,
+  nav button,
+  .btn-mobile-touch {
+    min-height: 2.75rem;
+  }
+
+  /* Tata letak kolom bertumpuk vertikal di ponsel */
+  .pos-responsive-split {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 1rem;
+  }
+
+  .pos-cart-flex {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  /* Modal dan dialog proporsional di layar ponsel */
+  .modal-responsive-box {
+    width: calc(100% - 1rem) !important;
+    max-width: 100% !important;
+    margin: 0.5rem auto;
+    max-height: calc(100dvh - 2rem);
+    border-radius: 1rem;
+  }
+
+  /* Tabel responsif dengan gulir horizontal halus */
+  .table-responsive-container {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* 2. MEDIA QUERY: LAYAR TABLET (768px - 1024px) */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  :root {
+    --app-fluid-padding: 1.25rem;
+  }
+
+  html {
+    font-size: 15.5px;
+  }
+
+  body {
+    line-height: 1.5;
+  }
+
+  /* Tata letak tablet adaptif */
+  .pos-responsive-split {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 1.25rem;
+  }
+
+  .pos-cart-flex {
+    width: 100% !important;
+  }
+
+  .grid-fluid-products {
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 12rem), 1fr));
+  }
+}
+
+/* 3. MEDIA QUERY: LAYAR DESKTOP (> 1024px) */
+@media screen and (min-width: 1024.02px) {
+  :root {
+    --app-fluid-padding: 1.75rem;
+  }
+
+  html {
+    font-size: 16px;
+  }
+
+  body {
+    line-height: 1.6;
+  }
+
+  /* Tata letak desktop berdampingan dengan rasio persentase/rem fleksibel */
+  .pos-responsive-split {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    width: 100%;
+    gap: 1.5rem;
+  }
+
+  .pos-catalog-flex {
+    flex: 1 1 66%;
+    min-width: 0;
+  }
+
+  .pos-cart-flex {
+    flex: 0 0 clamp(20rem, 30%, 26rem);
+    width: clamp(20rem, 30%, 26rem);
+    position: sticky;
+    top: 5rem;
+  }
+}
+
+/* 4. MEDIA QUERY: LAYAR ULTRA-WIDE / DESKTOP BESAR (> 1440px) */
+@media screen and (min-width: 1440px) {
+  :root {
+    --app-fluid-padding: 2.25rem;
+  }
+
+  .pos-catalog-flex {
+    flex: 1 1 70%;
+  }
+
+  .pos-cart-flex {
+    flex: 0 0 clamp(23rem, 28%, 29rem);
+    width: clamp(23rem, 28%, 29rem);
+  }
+}
+
+/* ==========================================================================
+   THEME STYLING: DARK / NIGHT MODE REFINEMENTS FOR COFFEE SHOP POS
+   ========================================================================== */
+
+/* Dark Mode Card Backgrounds & Borders */
+html.dark .bg-white {
+  background-color: #211512 !important;
+  color: #FAF3DD;
+}
+
+html.dark .bg-\[\#F9F6F2\],
+html.dark .bg-\[\#FAF6F0\],
+html.dark .bg-\[\#FDFBF7\] {
+  background-color: #1B110F !important;
+  color: #FAF3DD;
+}
+
+html.dark .bg-\[\#F5EBE0\],
+html.dark .bg-\[\#F2EFE9\],
+html.dark .bg-gray-50,
+html.dark .bg-gray-100 {
+  background-color: #2A1C18 !important;
+}
+
+html.dark .border-\[\#EBE3D5\],
+html.dark .border-\[\#E6D5C3\],
+html.dark .border-\[\#E0D7D0\],
+html.dark .border-gray-200,
+html.dark .border-gray-100 {
+  border-color: #3E2924 !important;
+}
+
+/* Dark Mode Typography Adjustments */
+html.dark .text-\[\#3E2723\],
+html.dark .text-\[\#2B1713\],
+html.dark .text-gray-900,
+html.dark .text-gray-800 {
+  color: #FAF3DD !important;
+}
+
+html.dark .text-gray-700,
+html.dark .text-gray-600 {
+  color: #D7CCC8 !important;
+}
+
+html.dark .text-gray-500,
+html.dark .text-\[\#8D7B68\] {
+  color: #A1887F !important;
+}
+
+/* Form Inputs & Selects in Dark Mode */
+html.dark input:not([type="checkbox"]):not([type="radio"]):not([type="color"]),
+html.dark select,
+html.dark textarea {
+  background-color: #18100E !important;
+  color: #FAF3DD !important;
+  border-color: #4A322C !important;
+}
+
+html.dark input::placeholder,
+html.dark textarea::placeholder {
+  color: #8D746D !important;
+}
+
+/* Dark Mode Tables */
+html.dark table thead th {
+  background-color: #261814 !important;
+  color: #D7CCC8 !important;
+  border-color: #3E2924 !important;
+}
+
+html.dark table tbody tr {
+  border-color: #3E2924 !important;
+}
+
+html.dark table tbody tr:hover {
+  background-color: #2A1C18 !important;
+}
+
+/* Dark Mode Status Badges */
+html.dark .bg-amber-50 {
+  background-color: rgba(120, 53, 15, 0.25) !important;
+}
+html.dark .border-amber-200 {
+  border-color: rgba(245, 158, 11, 0.3) !important;
+}
+
+html.dark .bg-emerald-50 {
+  background-color: rgba(6, 78, 59, 0.3) !important;
+}
+html.dark .border-emerald-200 {
+  border-color: rgba(16, 185, 129, 0.3) !important;
+}
+
+html.dark .bg-rose-50 {
+  background-color: rgba(136, 19, 55, 0.3) !important;
+}
+html.dark .border-rose-200 {
+  border-color: rgba(244, 63, 94, 0.3) !important;
+}
+
+html.dark .bg-blue-50 {
+  background-color: rgba(30, 58, 138, 0.3) !important;
+}
+html.dark .border-blue-200 {
+  border-color: rgba(59, 130, 246, 0.3) !important;
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #F2EFE9;
+}
+::-webkit-scrollbar-thumb {
+  background: #D7CCC8;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #8D7B68;
+}
+
+html.dark ::-webkit-scrollbar-track {
+  background: #140C0A;
+}
+html.dark ::-webkit-scrollbar-thumb {
+  background: #422D28;
+}
+html.dark ::-webkit-scrollbar-thumb:hover {
+  background: #6D4C41;
+}
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #thermal-receipt-container,
+  #thermal-receipt-container *,
+  #thermal-shift-container,
+  #thermal-shift-container * {
+    visibility: visible;
+  }
+  #thermal-receipt-container,
+  #thermal-shift-container {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 8px !important;
+    box-shadow: none !important;
+    background: #ffffff !important;
+    color: #000000 !important;
+    border: none !important;
+  }
+}
+
+
